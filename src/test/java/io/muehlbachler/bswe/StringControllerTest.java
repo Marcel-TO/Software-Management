@@ -20,11 +20,25 @@ public class StringControllerTest {
 
     @Test
     public void testToUpperCase() {
-        when(service.toUpperCase("abc")).thenReturn("abc");
+        when(service.toUpperCase("abc")).thenReturn("ABC");
 
         assertEquals("ABC", controller.upper("abc"));
         verify(service, times(1)).toUpperCase("abc");
     }
 
-    // FIXME: implement more tests
+    @Test
+    public void testToUpperCaseNull() {
+        when(service.toUpperCase(null)).thenThrow(IllegalArgumentException.class);
+
+        assertThrows(IllegalArgumentException.class, () -> controller.upper(null));
+        verify(service, times(1)).toUpperCase(null);
+    }
+
+    @Test
+    public void testToUpperCaseEmpty() {
+        when(service.toUpperCase("")).thenReturn("");
+
+        assertEquals("", controller.upper(""));
+        verify(service, times(1)).toUpperCase("");
+    }
 }

@@ -8,6 +8,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.hamcrest.Matchers;
 
 @SpringBootTest
@@ -22,5 +25,9 @@ public class StringControllerHttpTest {
                 .andExpect(MockMvcResultMatchers.content().string(Matchers.equalTo("ABC")));
     }
 
-    // FIXME: implement more tests
+    @Test
+    public void testToUpperCaseNull() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/upper?string")).andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(result -> assertEquals("String must not be null", result.getResolvedException().getMessage()));
+    }
 }
