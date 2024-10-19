@@ -8,8 +8,15 @@ public class StringServiceTest {
 
     @Test
     public void testToUpperCase() {
-        assertEquals(1, stringService.toUpperCase("abc"), "abc toUpperCase should be ABC");
+        assertEquals("ABC", stringService.toUpperCase("abc"), "abc toUpperCase should be ABC");
     }
 
-    // FIXME: implement more tests
+    @Test
+    public void testToUpperCaseNull() {
+        assertThrows(IllegalArgumentException.class, () -> stringService.toUpperCase(null));
+    }
+    @Test
+    public void testToUpperCaseEmpty() {
+        assertEquals("", stringService.toUpperCase(""));
+    }
 }
