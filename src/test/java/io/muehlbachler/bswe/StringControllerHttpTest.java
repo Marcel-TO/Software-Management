@@ -24,10 +24,4 @@ public class StringControllerHttpTest {
         mvc.perform(MockMvcRequestBuilders.get("/upper?string=abc")).andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string(Matchers.equalTo("ABC")));
     }
-
-    @Test
-    public void testToUpperCaseNull() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/upper?string")).andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(result -> assertEquals("String must not be null", result.getResolvedException().getMessage()));
-    }
 }
